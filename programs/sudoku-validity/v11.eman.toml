@@ -1,0 +1,42 @@
+# H11: merge PHASE into RELAY.  The relay holds v_prev+1 in B; its ring r/s
+# transfer preserves B.  It forwards row/col/skip/box, then transfers skip+1
+# tokens so the ring is in the same phase as V10.
+problem = "sudoku-validity"
+
+[rooms]
+input = "input"
+output = "output"
+head = "sudoku11-head"
+mask = "sudoku6-mask"
+relay = "sudoku11-relay"
+
+[[pipes]]
+from = "input.out"
+to = "mask.feed"
+min = 2
+
+[[pipes]]
+from = "mask.out"
+to = "relay.feed"
+min = 2
+
+[[pipes]]
+from = "relay.phase_out"
+to = "head.mask_in"
+min = 2
+
+[[pipes]]
+from = "head.ring_out"
+to = "relay.ring_feed"
+# HEAD seeds nine words before the merged relay reaches its ring loop.
+min = 9
+
+[[pipes]]
+from = "relay.ring_out"
+to = "head.ring_in"
+min = 5
+
+[[pipes]]
+from = "head.verdict"
+to = "output.feed"
+min = 2

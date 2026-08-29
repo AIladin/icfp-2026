@@ -1,0 +1,6 @@
+description = "the LM-75, 16x16: ADDR on top, DATA on the left, SWAP on the bottom"
+
+[ports]
+addr = "P"
+data = "T"
+swap = "U"

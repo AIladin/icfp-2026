@@ -1,0 +1,46 @@
+problem = "history-lesson"
+
+[rooms]
+drum = "history-drum-direct"
+dict = "history-dict"
+dec = "history-dec"
+exp = "history-exp-direct"
+year = "history-year"
+relay = "history-relay"
+output = "output"
+
+[[pipes]]
+from = "drum.out"
+to = "dec.feed"
+min = 2
+
+[[pipes]]
+from = "dec.out"
+to = "exp.stream"
+min = 2
+
+[[pipes]]
+from = "dict.out"
+to = "exp.dict"
+min = 2
+
+[[pipes]]
+from = "exp.ring_out"
+to = "relay.feed"
+# 41 initialized words occupy the two legs plus RELAY's hand; 40 cells is the safe floor.
+min = 40
+
+[[pipes]]
+from = "relay.out"
+to = "exp.ring_in"
+min = 2
+
+[[pipes]]
+from = "exp.out"
+to = "year.feed"
+min = 2
+
+[[pipes]]
+from = "year.out"
+to = "output.feed"
+min = 2

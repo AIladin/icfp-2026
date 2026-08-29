@@ -1,0 +1,12 @@
+.devenv
+.env
+
+# Cargo build output. `devenv.nix` points CARGO_TARGET_DIR here, so maturin's build of the Python
+# extension lands in it too. `Cargo.lock` stays tracked — rs/ builds a binary, not a library.
+rs/target/
+
+# Obsidian: vendored community-plugin bundles (4.7 MB of Excalidraw) and per-user UI state.
+# Shared vault config (app/appearance/core-plugins/graph) stays tracked.
+docs/vault/.obsidian/plugins/
+docs/vault/.obsidian/workspace.json
+cases-snake*.json

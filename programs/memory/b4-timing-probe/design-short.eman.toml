@@ -1,0 +1,39 @@
+# Optimistic B=4 timing probe: on addresses all congruent mod 4, each selected bank can hold at
+# most 25 pairs. The proven B=2 head is unchanged; only each ring's semantic capacity is shortened
+# from 101 to 51 tokens (25 + 25 pipe cells + the relay hand).
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+head = "memory-head-sbs"
+relay0 = "memory-relay"
+relay1 = "memory-relay"
+
+[[pipes]]
+from = "input.out"
+to = "head.input"
+
+[[pipes]]
+from = "head.output"
+to = "output.feed"
+
+[[pipes]]
+from = "head.ring_out0"
+to = "relay0.feed"
+min = 25
+
+[[pipes]]
+from = "relay0.out"
+to = "head.ring_in0"
+min = 25
+
+[[pipes]]
+from = "head.ring_out1"
+to = "relay1.feed"
+min = 25
+
+[[pipes]]
+from = "relay1.out"
+to = "head.ring_in1"
+min = 25

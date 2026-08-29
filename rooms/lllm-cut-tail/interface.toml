@@ -1,0 +1,6 @@
+description = "server-shrunk LLLM tail"
+
+[ports]
+chars = "D"
+ring_in = "I"
+ring_out = "h"

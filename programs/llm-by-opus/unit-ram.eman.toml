@@ -1,0 +1,58 @@
+# RAM on its own: a probe room drives the bus and reports each answer to an output room.
+# Never submitted -- a display-judged program may not emit output.  See gen/room_probe.py.
+problem = "hello-world"
+
+[rooms]
+probe = "llm-op-probe"
+ram = "llm-op-ram"
+relay = "llm-op-relay"
+inp = "input"
+out = "output"
+disp = "llm-op-disp"
+lm75 = "llm-display"
+
+[[pipes]]
+from = "probe.bus_out"
+to = "ram.bus_in"
+
+[[pipes]]
+from = "ram.bus_out"
+to = "probe.bus_in"
+
+# THE RING IS A SUM: both legs plus the two hands must hold all 128 words at once, and a few
+# spare cells so the queue can actually shift.  Undersizing deadlocks silently as a step cap.
+[[pipes]]
+from = "ram.ring_out"
+to = "relay.ring_in"
+min = 190
+max = 230
+
+[[pipes]]
+from = "relay.ring_out"
+to = "ram.ring_in"
+min = 190
+max = 230
+
+[[pipes]]
+from = "probe.report"
+to = "out.feed"
+
+[[pipes]]
+from = "inp.out"
+to = "ram.inp"
+
+[[pipes]]
+from = "ram.disp"
+to = "disp.cmd"
+
+[[pipes]]
+from = "disp.addr"
+to = "lm75.addr"
+
+[[pipes]]
+from = "disp.data"
+to = "lm75.data"
+
+[[pipes]]
+from = "disp.swap"
+to = "lm75.swap"

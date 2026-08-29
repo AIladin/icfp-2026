@@ -1,0 +1,6 @@
+description = "server-shrunk LLLM display"
+
+[ports]
+addr = "P"
+data = "T"
+swap = "U"

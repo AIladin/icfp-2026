@@ -1,0 +1,8 @@
+description = "lllm EMIT, 200x30 interior"
+
+[ports]
+cmd = "Q"
+colour = "M"
+addr = "p"
+swap = "u"
+data = "t"

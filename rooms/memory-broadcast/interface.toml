@@ -1,0 +1,6 @@
+description = "broadcast one request to two children"
+
+[ports]
+request = "A"
+child0 = "b"
+child1 = "c"

@@ -1,0 +1,5 @@
+description = "sudoku mask room: rowbit, then a Y into concurrent box and column lanes"
+
+[ports]
+feed = "G"
+out = "h"

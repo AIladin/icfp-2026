@@ -1,0 +1,5 @@
+description = "reverse-a-list: reader ring + delay ring, one lineage of little men"
+
+[ports]
+input = "A"
+output = "b"

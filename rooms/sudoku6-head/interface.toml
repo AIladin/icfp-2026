@@ -1,0 +1,7 @@
+description = "sudoku ring head: accumulate, skip, xor-and-test kernel, verdict"
+
+[ports]
+ring_out = "a"
+ring_in = "B"
+mask_in = "C"
+verdict = "d"

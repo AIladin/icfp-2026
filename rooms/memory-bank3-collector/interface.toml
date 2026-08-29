@@ -1,0 +1,7 @@
+description = "merge ordered read responses from three sequentially dispatched banks"
+
+[ports]
+bank0 = "B"
+bank1 = "D"
+bank2 = "F"
+out = "g"

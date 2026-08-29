@@ -1,0 +1,5 @@
+description = "seed nine zero words, then shuttle the sudoku ring"
+
+[ports]
+feed = "J"
+out = "k"

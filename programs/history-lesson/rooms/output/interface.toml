@@ -1,0 +1,4 @@
+description = "the standard 3x3 output room"
+
+[ports]
+feed = "A"

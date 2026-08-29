@@ -1,0 +1,16 @@
+[package]
+name = "lmr"
+description = "Run Littleman (.man) programs locally, fast"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "lmr"
+path = "src/main.rs"
+
+[dependencies]
+littleman = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+clap = { version = "4", features = ["derive"] }

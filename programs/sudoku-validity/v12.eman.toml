@@ -1,0 +1,42 @@
+# H12: split PHASE at v. MASK sends rowbit, colbit, v, boxbit;
+# PHASE's right child sends skip while its left child installs v+1 and relays boxbit.
+
+problem = "sudoku-validity"
+
+[rooms]
+input = "input"
+output = "output"
+mask = "sudoku12-mask"
+phase = "sudoku12-phase"
+head = "sudoku12-head"
+relay = "sudoku12-relay"
+
+[[pipes]]
+from = "input.out"
+to = "mask.feed"
+min = 2
+
+[[pipes]]
+from = "mask.out"
+to = "phase.feed"
+min = 2
+
+[[pipes]]
+from = "phase.out"
+to = "head.mask_in"
+min = 2
+
+[[pipes]]
+from = "head.ring_out"
+to = "relay.feed"
+min = 5
+
+[[pipes]]
+from = "relay.out"
+to = "head.ring_in"
+min = 5
+
+[[pipes]]
+from = "head.verdict"
+to = "output.feed"
+min = 2

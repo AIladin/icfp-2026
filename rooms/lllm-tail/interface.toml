@@ -1,0 +1,6 @@
+description = "lllm TAIL, 10x8 interior"
+
+[ports]
+chars = "D"
+ring_in = "I"
+ring_out = "h"

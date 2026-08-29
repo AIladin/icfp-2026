@@ -1,0 +1,8 @@
+description = "llm COLCTL, 150x44 interior"
+
+[ports]
+inp = "A"
+rowkind = "C"
+head = "b"
+chars = "d"
+steps = "f"

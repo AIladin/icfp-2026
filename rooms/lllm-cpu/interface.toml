@@ -1,0 +1,8 @@
+description = "lllm CPU, 200x46 interior"
+
+[ports]
+payload = "O"
+flags = "E"
+state = "n"
+count = "k"
+emit = "q"

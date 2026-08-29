@@ -1,0 +1,29 @@
+# Safe pipeline with concurrent in-stack sentinel initialization.
+problem = "brackets"
+
+[rooms]
+input = "input"
+decode = "brackets-decoder"
+stack = "brackets-stack3-local-sentinel"
+counter = "brackets-counter-flat"
+output = "output"
+
+[[pipes]]
+from = "input.out"
+to = "decode.feed"
+min = 2
+
+[[pipes]]
+from = "decode.out"
+to = "stack.feed"
+min = 2
+
+[[pipes]]
+from = "stack.verdict"
+to = "counter.feed"
+min = 2
+
+[[pipes]]
+from = "counter.out"
+to = "output.feed"
+min = 2

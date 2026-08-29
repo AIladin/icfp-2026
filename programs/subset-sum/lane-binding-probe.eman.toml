@@ -1,0 +1,31 @@
+# Geometry-only falsification probe: no case should be judged with this design.
+# The shared sends on p1/p2 model level i DOWN and level i+2 UP using one strict pin-aligned s.
+problem = "subset-sum"
+
+[rooms]
+left = "subset-lane-left-probe"
+right = "subset-lane-right-probe"
+
+[[pipes]]
+from = "right.p0"
+to = "left.p0"
+min = 2
+max = 10
+
+[[pipes]]
+from = "left.p1"
+to = "right.p1"
+min = 2
+max = 10
+
+[[pipes]]
+from = "right.p2"
+to = "left.p2"
+min = 2
+max = 10
+
+[[pipes]]
+from = "left.p3"
+to = "right.p3"
+min = 2
+max = 10

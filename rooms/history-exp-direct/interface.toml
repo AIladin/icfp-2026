@@ -1,0 +1,6 @@
+[ports]
+dict = "A"
+stream = "B"
+ring_in = "C"
+out = "d"
+ring_out = "e"

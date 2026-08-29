@@ -1,0 +1,5 @@
+description = "first duplicate check lane (V5)"
+
+[ports]
+feed = "A"
+out = "b"

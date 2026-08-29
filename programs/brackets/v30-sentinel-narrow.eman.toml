@@ -1,0 +1,29 @@
+# Safe seeded-sentinel pipeline with a narrow shared-division stack.
+problem = "brackets"
+
+[rooms]
+input = "input"
+decode = "brackets-decoder-seed1"
+stack = "brackets-stack3-sentinel-narrow"
+counter = "brackets-counter"
+output = "output"
+
+[[pipes]]
+from = "input.out"
+to = "decode.feed"
+min = 2
+
+[[pipes]]
+from = "decode.out"
+to = "stack.feed"
+min = 2
+
+[[pipes]]
+from = "stack.verdict"
+to = "counter.feed"
+min = 2
+
+[[pipes]]
+from = "counter.out"
+to = "output.feed"
+min = 2

@@ -1,0 +1,19 @@
+[package]
+name = "packer"
+description = "EDA-style place-and-route: compile a .eman.toml netlist + rooms/ library into a .man"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "lmp"
+path = "src/main.rs"
+
+[dependencies]
+littleman = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = "0.8"
+clap = { version = "4", features = ["derive"] }
+rustworkx-core = "0.18"

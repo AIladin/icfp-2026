@@ -1,0 +1,6 @@
+description = "sort v4 head: selection sort with one outgoing typed-token pipe"
+
+[ports]
+input = "A"
+ring_back = "B"
+ring_out = "c"

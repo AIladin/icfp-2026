@@ -1,0 +1,5 @@
+description = "sudoku H12 mask: rowbit, colbit, one v, boxbit"
+
+[ports]
+feed = "G"
+out = "h"

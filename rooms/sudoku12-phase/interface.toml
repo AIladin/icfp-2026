@@ -1,0 +1,5 @@
+description = "sudoku H12 split phase: concurrent skip and state update"
+
+[ports]
+feed = "G"
+out = "h"

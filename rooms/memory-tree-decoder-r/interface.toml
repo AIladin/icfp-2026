@@ -1,0 +1,9 @@
+description = "single-flight one-bit request/response memory-tree router"
+
+[ports]
+parent_req = "A"
+child_req0 = "b"
+child_resp0 = "C"
+child_req1 = "d"
+child_resp1 = "E"
+parent_resp = "f"

@@ -1,0 +1,13 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+cell = "memory-tree-cell"
+
+[[pipes]]
+from = "input.out"
+to = "cell.request"
+[[pipes]]
+from = "cell.response"
+to = "output.feed"

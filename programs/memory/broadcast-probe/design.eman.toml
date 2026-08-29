@@ -1,0 +1,28 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+bcast = "memory-broadcast"
+reduce = "memory-reduce"
+leaf0 = "memory-named-leaf0"
+leaf1 = "memory-named-leaf1"
+
+[[pipes]]
+from = "input.out"
+to = "bcast.request"
+[[pipes]]
+from = "bcast.child0"
+to = "leaf0.request"
+[[pipes]]
+from = "bcast.child1"
+to = "leaf1.request"
+[[pipes]]
+from = "leaf0.response"
+to = "reduce.child0"
+[[pipes]]
+from = "leaf1.response"
+to = "reduce.child1"
+[[pipes]]
+from = "reduce.response"
+to = "output.feed"

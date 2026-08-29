@@ -1,0 +1,7 @@
+description = "decode replay tokens into LM-75 DATA and SWAP"
+
+[ports]
+stream = "Z"
+data = "t"
+swap = "u"
+addr = "a"

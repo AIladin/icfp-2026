@@ -1,0 +1,91 @@
+# little-little-man: an LLM interpreter on the LM-75.
+#
+# The rooms are `py/llm_gen.py` and `py/llm_cpu.py`, rendered into the library by
+# `py/llm_rooms.py`.  Architecture and the reference semantics are in
+# `docs/vault/log/2026-07-26-llm.md`; `py/llm_model.py` reproduces all 135 expected frames of the
+# 14 public cases byte for byte, so the semantics are settled and only the machine is in doubt.
+#
+# LLM gives 50M ticks for <=100 interpreted ticks -- 500k machine ticks each, 20x LLLM's budget --
+# which is why this is a random-access RAM and a sequential CPU rather than LLLM's aligned ring.
+#
+# THE RING IS A SUM, NOT A SPLIT.  RELAY -ring_out-> RAM -ring_out-> RELAY must hold all 352
+# words (256 grid + 96 vars) at once; capacity is one leg plus the other plus the hands between.
+# Undersizing DEADLOCKS SILENTLY and presents as a step cap, never an error.
+
+problem = "little-little-man"
+
+[rooms]
+inp = "input"
+# COLCTL's base variant puts `b` (to ROWCTL) on the SOUTH wall while `C` (back from ROWCTL) is on
+# the NORTH one, so ROWCTL's two pipes have to wrap right around a 152-wide room and they contest
+# cells with `d` and `f` in every arrangement.  Both surviving variants put `b` north, next to
+# `C`, and ROWCTL then sits entirely north of COLCTL with no wrap at all.
+colctl = { type = "llm-colctl", variants = ["An50-Cn130-bn1-ds40-fs130", "An99-Cn130-bn1-ds40-fs130"] }
+rowctl = "llm-rowctl"
+classify = "llm-classify"
+relay = "llm-relay"
+ram = "llm-ram"
+cpu = "llm-cpu"
+disp = "llm-disp"
+lm75 = "llm-display"
+
+[[pipes]]
+from = "inp.out"
+to = "colctl.inp"
+
+[[pipes]]
+from = "colctl.head"
+to = "rowctl.head"
+
+[[pipes]]
+from = "rowctl.kinds"
+to = "colctl.rowkind"
+
+[[pipes]]
+from = "colctl.chars"
+to = "classify.chars"
+
+[[pipes]]
+from = "classify.words"
+to = "relay.words"
+
+[[pipes]]
+from = "colctl.steps"
+to = "ram.steps"
+
+[[pipes]]
+from = "relay.ring_out"
+to = "ram.ring_in"
+min = 180
+
+[[pipes]]
+from = "ram.ring_out"
+to = "relay.ring_in"
+min = 180
+
+[[pipes]]
+from = "cpu.bus_out"
+to = "ram.bus_in"
+
+[[pipes]]
+from = "ram.bus_out"
+to = "cpu.bus_in"
+
+[[pipes]]
+from = "ram.disp"
+to = "disp.cmd"
+
+# DISP's three sends are ~400 cells apart inside the room, so any two pipe lengths within that
+# of each other keep the arrivals in program order.  `SWAP 0` resets the cursor as well as
+# committing, so there is no incremental-paint timing problem to hold here -- unlike LLLM.
+[[pipes]]
+from = "disp.addr"
+to = "lm75.addr"
+
+[[pipes]]
+from = "disp.data"
+to = "lm75.data"
+
+[[pipes]]
+from = "disp.swap"
+to = "lm75.swap"

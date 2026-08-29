@@ -1,0 +1,6 @@
+description = "server-shrunk LLLM split"
+
+[ports]
+cell = "J"
+payload = "l"
+colour = "m"

@@ -1,0 +1,28 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+
+[workspace.dependencies]
+littleman = { path = "crates/littleman" }
+rayon = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+
+[profile.dev]
+# The dev binaries are not "a build you debug" here — `lmp` routes and judges thousands of layouts
+# per run, so unoptimized codegen turns a 30-second search into a 30-minute one. opt-level 2 with
+# incremental codegen still rebuilds in well under a second, and debug assertions stay on.
+opt-level = 2
+
+[profile.release]
+# The whole point of this crate is the tick loop. One codegen unit and fat LTO buy real speed on a
+# workload this small to compile. `panic` stays at `unwind`: the same profile builds the Python
+# extension module, and a panic that aborts would take the interpreter down with it.
+lto = "fat"
+codegen-units = 1

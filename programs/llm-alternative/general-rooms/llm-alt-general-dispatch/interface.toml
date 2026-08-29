@@ -1,0 +1,8 @@
+description = "sparse runtime LLM llm-alt-general-dispatch"
+
+[ports]
+event = "A"
+cpu = "b"
+stream = "c"
+loader = "d"
+man = "e"

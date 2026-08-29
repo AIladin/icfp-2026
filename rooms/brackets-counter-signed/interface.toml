@@ -1,0 +1,5 @@
+description = "counts accepted bracket characters and emits the result"
+
+[ports]
+feed = "E"
+out = "f"

@@ -1,0 +1,13 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+leaf = "memory-two-token-leaf0"
+
+[[pipes]]
+from = "input.out"
+to = "leaf.request"
+[[pipes]]
+from = "leaf.response"
+to = "output.feed"

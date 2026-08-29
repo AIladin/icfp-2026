@@ -1,0 +1,9 @@
+description = "banked memory head: one prologue and bank decode driving two independent scan loops"
+
+[ports]
+input = "A"
+output = "c"
+ring_in0 = "F"
+ring_out0 = "e"
+ring_in1 = "J"
+ring_out1 = "g"

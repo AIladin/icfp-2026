@@ -1,0 +1,5 @@
+description = "one-bit named persistent memory leaf"
+
+[ports]
+request = "A"
+response = "b"

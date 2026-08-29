@@ -1,0 +1,4 @@
+description = "tcp H2 probe only: consume reader feedback forever"
+
+[ports]
+in = "A"

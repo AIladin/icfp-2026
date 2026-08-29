@@ -1,0 +1,5 @@
+description = "narrow seeded base-3 sentinel stack with shared pop/end division"
+
+[ports]
+feed = "C"
+verdict = "e"

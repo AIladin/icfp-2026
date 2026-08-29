@@ -1,0 +1,5 @@
+[
+  {"name":"even route", "rounds":[{"in":["84"], "out":["42"]}]},
+  {"name":"odd route", "rounds":[{"in":["85"], "out":["42"]}]},
+  {"name":"stream alternates", "rounds":[{"in":["2","5","8","11","14","17"], "out":["1","2","4","5","7","8"]}]}
+]

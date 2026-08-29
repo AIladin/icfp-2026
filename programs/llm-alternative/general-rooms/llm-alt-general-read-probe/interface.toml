@@ -1,0 +1,5 @@
+description = "sparse runtime LLM llm-alt-general-read-probe"
+
+[ports]
+command = "a"
+response = "B"

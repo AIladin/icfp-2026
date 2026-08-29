@@ -1,0 +1,80 @@
+[
+  {
+    "name": "zero",
+    "rounds": [
+      {
+        "in": [
+          "0"
+        ],
+        "out": [
+          "0"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "one",
+    "rounds": [
+      {
+        "in": [
+          "1"
+        ],
+        "out": [
+          "1"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "four",
+    "rounds": [
+      {
+        "in": [
+          "4"
+        ],
+        "out": [
+          "10"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ten",
+    "rounds": [
+      {
+        "in": [
+          "10"
+        ],
+        "out": [
+          "55"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "sixty-three",
+    "rounds": [
+      {
+        "in": [
+          "63"
+        ],
+        "out": [
+          "2016"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "nine hundred eighty-seven",
+    "rounds": [
+      {
+        "in": [
+          "987"
+        ],
+        "out": [
+          "487578"
+        ]
+      }
+    ]
+  }
+]

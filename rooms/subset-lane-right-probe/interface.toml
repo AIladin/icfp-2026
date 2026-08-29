@@ -1,0 +1,7 @@
+description = "binding probe for odd subset-sum lanes; not executable DFS logic"
+
+[ports]
+p0 = "a"
+p1 = "B"
+p2 = "c"
+p3 = "D"

@@ -1,0 +1,15 @@
+{
+  "_comment": "v2 stack with input moved one lattice column west to separate its COLCTL input from COLCTL->ROWCTL",
+  "pos": {
+    "inp": [-1, 7],
+    "rowctl": [1, 7],
+    "colctl": [0, 6],
+    "tail": [0, 5],
+    "rot": [2, 5],
+    "cpu": [0, 4],
+    "echo": [0, 3],
+    "split": [0, 2],
+    "emit": [0, 1],
+    "lm75": [0, 0]
+  }
+}

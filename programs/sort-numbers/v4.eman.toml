@@ -1,0 +1,38 @@
+# v4 hypothesis: HEAD has one outgoing typed-token stream. TAIL relays nonnegative values and the
+# zero lap marker back to HEAD; a negative token is -(minimum + K), which TAIL unbiases to output.
+#
+# The ring must hold at most 16 biased values plus one marker. Its two pipe legs therefore carry at
+# least 15 + 2 = 17 tokens. Upper bounds keep route latency from silently overwhelming the tick win;
+# correctness does not depend on an exact split, only the stated capacity floor.
+
+problem = "sort-numbers"
+
+[rooms]
+input = "input"
+output = "output"
+head = "sort4-head"
+tail = { type = "sort4-tail", variants = ["east"] }
+
+[[pipes]]
+from = "input.out"
+to = "head.input"
+min = 2
+max = 100
+
+[[pipes]]
+from = "head.ring_out"
+to = "tail.ring_in"
+min = 15
+max = 100
+
+[[pipes]]
+from = "tail.ring_out"
+to = "head.ring_back"
+min = 2
+max = 100
+
+[[pipes]]
+from = "tail.output"
+to = "output.feed"
+min = 2
+max = 100

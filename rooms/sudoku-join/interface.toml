@@ -1,0 +1,7 @@
+description = "merges the three check lanes into one verdict stream"
+
+[ports]
+left = "A"
+mid = "B"
+right = "C"
+out = "d"

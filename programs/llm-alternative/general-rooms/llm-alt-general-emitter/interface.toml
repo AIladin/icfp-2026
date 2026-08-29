@@ -1,0 +1,7 @@
+description = "sparse runtime LLM llm-alt-general-emitter"
+
+[ports]
+stream = "A"
+data = "b"
+swap = "c"
+addr = "d"

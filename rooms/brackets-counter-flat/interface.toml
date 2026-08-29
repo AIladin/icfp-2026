@@ -1,0 +1,5 @@
+description = "three-row zero-success brackets position counter"
+
+[ports]
+feed = "E"
+out = "f"

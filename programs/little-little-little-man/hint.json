@@ -1,0 +1,15 @@
+{
+  "_comment": "Hand-written stack, not eman_hint output. Hint y increases NORTHWARD (lmp flips it); only the ranking survives, not the spacing. Two columns: the 202-wide rooms in column 0, the side-cars (ROWCTL beside IN, ROT beside TAIL) in column 1. North to south: IN/ROWCTL, COLCTL, TAIL/ROT, CPU, ECHO, SPLIT, EMIT, LM-75 - the cycle order that makes the pipe graph planar, with the chords colctl.flags, rot.cell and cpu.emit taking the two side corridors.",
+  "pos": {
+    "inp": [0, 7],
+    "rowctl": [1, 7],
+    "colctl": [0, 6],
+    "tail": [0, 5],
+    "rot": [1, 5],
+    "cpu": [0, 4],
+    "echo": [0, 3],
+    "split": [0, 2],
+    "emit": [0, 1],
+    "lm75": [0, 0]
+  }
+}

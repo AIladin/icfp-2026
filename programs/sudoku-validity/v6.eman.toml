@@ -1,0 +1,53 @@
+# sudoku-validity V6: four rooms, six pipes.
+#
+#     INPUT -> MASK -> PHASE -> HEAD <-> RELAY
+#                                |
+#                                v
+#                              OUTPUT
+#
+# MASK merges V3b's M1 and M2 with a `Y`: `c` is live twice and B is holding
+# K = 54+9*(r/3) when it arrives, so the split makes the box lane and the column lane
+# two men that run concurrently inside one room.  100.1 ticks/round against V3b's 103.1,
+# and one room and one pipe fewer.
+#
+# PHASE lost its three-lane `X`: `%` takes B's sign, so (v - v_prev - 1) mod 9 is
+# `- M 9 W %`, four cells, and the room is a plain two-row serpentine.
+#
+# The ring holds nine tokens and capacity is `ring_out cells + ring_in cells + 1`, so
+# the two legs get min 5 each.  UNDERSIZING DEADLOCKS SILENTLY as a step-cap.
+
+problem = "sudoku-validity"
+
+[rooms]
+input = "input"
+output = "output"
+head = "sudoku6-head"
+relay = "sudoku6-relay"
+phase = "sudoku6-phase"
+mask = "sudoku6-mask"
+
+[[pipes]]
+from = "input.out"
+to = "mask.feed"
+
+[[pipes]]
+from = "mask.out"
+to = "phase.feed"
+
+[[pipes]]
+from = "phase.out"
+to = "head.mask_in"
+
+[[pipes]]
+from = "head.ring_out"
+to = "relay.feed"
+min = 5
+
+[[pipes]]
+from = "relay.out"
+to = "head.ring_in"
+min = 5
+
+[[pipes]]
+from = "head.verdict"
+to = "output.feed"

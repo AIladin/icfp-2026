@@ -1,0 +1,105 @@
+# sudoku-validity V5 as a netlist over the global rooms/ library.
+# Topology transcribed from programs/sudoku-v5-marked.man (the hand-marked handoff);
+# the hand-packed benchmark is programs/sudoku_packed_3_64M.man (26x27, score 3.598M local).
+
+problem = "sudoku-validity"
+
+[rooms]
+input = "input"
+split = "sudoku-split"
+check1 = "sudoku-check-a"
+check2 = "sudoku-check-b"
+check3 = "sudoku-check-c"
+join = "sudoku-join"
+decode = "sudoku-decode"
+cell1 = "sudoku-cell"
+cell2 = "sudoku-cell"
+cell3 = "sudoku-cell"
+cell4 = "sudoku-cell"
+cell5 = "sudoku-cell"
+final = "sudoku-final"
+output = "output"
+
+[[pipes]]
+from = "input.out"
+to = "split.feed"
+
+[[pipes]]
+from = "split.chk1"
+to = "check1.feed"
+
+[[pipes]]
+from = "split.chk2"
+to = "check2.feed"
+
+[[pipes]]
+from = "split.chk3"
+to = "check3.feed"
+
+[[pipes]]
+from = "split.dec"
+to = "decode.seed"
+
+[[pipes]]
+from = "check1.out"
+to = "join.left"
+
+[[pipes]]
+from = "check2.out"
+to = "join.mid"
+
+[[pipes]]
+from = "check3.out"
+to = "join.right"
+
+[[pipes]]
+from = "join.out"
+to = "decode.join"
+
+[[pipes]]
+from = "decode.bit1"
+to = "cell1.feed"
+
+[[pipes]]
+from = "decode.bit2"
+to = "cell2.feed"
+
+[[pipes]]
+from = "decode.bit3"
+to = "cell3.feed"
+
+[[pipes]]
+from = "decode.bit4"
+to = "cell4.feed"
+
+[[pipes]]
+from = "decode.bit5"
+to = "cell5.feed"
+
+[[pipes]]
+from = "decode.carry"
+to = "final.from_decode"
+
+[[pipes]]
+from = "cell1.out"
+to = "final.from_cell1"
+
+[[pipes]]
+from = "cell2.out"
+to = "final.from_cell2"
+
+[[pipes]]
+from = "cell3.out"
+to = "final.from_cell3"
+
+[[pipes]]
+from = "cell4.out"
+to = "final.from_cell4"
+
+[[pipes]]
+from = "cell5.out"
+to = "final.from_cell5"
+
+[[pipes]]
+from = "final.out"
+to = "output.feed"

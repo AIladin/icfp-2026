@@ -1,0 +1,5 @@
+description = "echo leaf for memory-tree router protocol tests"
+
+[ports]
+request = "A"
+response = "b"

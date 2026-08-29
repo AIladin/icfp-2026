@@ -1,0 +1,5 @@
+description = "CPU: the compiled LLM interpreter"
+
+[ports]
+bus_out = "k"
+bus_in = "J"

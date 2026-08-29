@@ -1,0 +1,11 @@
+description = "sparse runtime LLM llm-alt-general-ram"
+
+[ports]
+control = "A"
+ring_in = "B"
+ring_out = "c"
+event = "d"
+stash_in = "E"
+stash_out = "f"
+var_in = "G"
+var_out = "h"

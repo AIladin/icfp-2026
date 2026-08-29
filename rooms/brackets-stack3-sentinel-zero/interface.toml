@@ -1,0 +1,5 @@
+description = "depth-32-safe base-3 sentinel stack with zero success verdicts"
+
+[ports]
+feed = "C"
+verdict = "e"

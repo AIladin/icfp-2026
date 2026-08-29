@@ -1,0 +1,7 @@
+description = "route preprocessed memory operations to one of three adaptive banks"
+
+[ports]
+input = "A"
+bank0 = "b"
+bank1 = "d"
+bank2 = "f"

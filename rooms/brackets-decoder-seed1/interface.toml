@@ -1,0 +1,5 @@
+description = "branch-free ASCII bracket decoder with synthetic +1 sentinel"
+
+[ports]
+feed = "A"
+out = "c"

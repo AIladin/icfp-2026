@@ -1,0 +1,79 @@
+# Four adaptive banks: address bit 1 selects a B=2 head; each head splits on
+# (addr+1)&1. Every ring has 25 legal addresses. The 30-cell leg minima are
+# throughput-load-bearing; see [[A full adaptive memory ring needs throughput slack]].
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+router = "memory-pair-router"
+head0 = "memory-head-sbs"
+head1 = "memory-head-sbs"
+relay0 = "memory-relay"
+relay1 = "memory-relay"
+relay2 = "memory-relay"
+relay3 = "memory-relay"
+
+[[pipes]]
+from = "input.out"
+to = "router.raw"
+
+[[pipes]]
+from = "router.pair0"
+to = "head0.input"
+
+[[pipes]]
+from = "router.pair1"
+to = "head1.input"
+
+[[pipes]]
+from = "head0.output"
+to = "router.result0"
+
+[[pipes]]
+from = "head1.output"
+to = "router.result1"
+
+[[pipes]]
+from = "router.output"
+to = "output.feed"
+
+[[pipes]]
+from = "head0.ring_out0"
+to = "relay0.feed"
+min = 30
+
+[[pipes]]
+from = "relay0.out"
+to = "head0.ring_in0"
+min = 30
+
+[[pipes]]
+from = "head0.ring_out1"
+to = "relay1.feed"
+min = 30
+
+[[pipes]]
+from = "relay1.out"
+to = "head0.ring_in1"
+min = 30
+
+[[pipes]]
+from = "head1.ring_out0"
+to = "relay2.feed"
+min = 30
+
+[[pipes]]
+from = "relay2.out"
+to = "head1.ring_in0"
+min = 30
+
+[[pipes]]
+from = "head1.ring_out1"
+to = "relay3.feed"
+min = 30
+
+[[pipes]]
+from = "relay3.out"
+to = "head1.ring_in1"
+min = 30

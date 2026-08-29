@@ -1,0 +1,5 @@
+description = "snake: the whole game as a compiled CFG, one pipe in and one out"
+
+[ports]
+ring_out = "a"
+ring_in = "B"

@@ -1,0 +1,27 @@
+problem = "little-little-man"
+
+[rooms]
+input = "input"
+replay = "llm-alt-replay"
+emitter = "llm-alt-emitter"
+display = "llm-alt-display"
+
+[[pipes]]
+from = "input.out"
+to = "replay.input"
+
+[[pipes]]
+from = "replay.stream"
+to = "emitter.stream"
+
+[[pipes]]
+from = "emitter.data"
+to = "display.data"
+
+[[pipes]]
+from = "emitter.swap"
+to = "display.swap"
+
+[[pipes]]
+from = "emitter.addr"
+to = "display.addr"

@@ -1,0 +1,86 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+prep = "memory-bank3-prep"
+router = "memory-bank3-router"
+bank0 = "memory-bank3-head"
+bank1 = "memory-bank3-head"
+bank2 = "memory-bank3-head"
+relay0 = "memory-relay"
+relay1 = "memory-relay"
+relay2 = "memory-relay"
+collector = "memory-bank3-collector"
+output = "output"
+
+[[pipes]]
+from = "input.out"
+to = "prep.input"
+
+[[pipes]]
+from = "prep.out"
+to = "router.input"
+
+[[pipes]]
+from = "router.bank0"
+to = "bank0.input"
+
+[[pipes]]
+from = "router.bank1"
+to = "bank1.input"
+
+[[pipes]]
+from = "router.bank2"
+to = "bank2.input"
+
+[[pipes]]
+from = "bank0.output"
+to = "collector.bank0"
+
+[[pipes]]
+from = "bank1.output"
+to = "collector.bank1"
+
+[[pipes]]
+from = "bank2.output"
+to = "collector.bank2"
+
+[[pipes]]
+from = "collector.out"
+to = "prep.result"
+
+[[pipes]]
+from = "prep.output"
+to = "output.feed"
+
+# bank 0 has 34 local addresses: 68 data tokens + marker. Capacity is both legs + relay hand.
+[[pipes]]
+from = "bank0.ring_out"
+to = "relay0.feed"
+min = 34
+
+[[pipes]]
+from = "relay0.out"
+to = "bank0.ring_in"
+min = 34
+
+# banks 1 and 2 have 33 local addresses: 66 data tokens + marker.
+[[pipes]]
+from = "bank1.ring_out"
+to = "relay1.feed"
+min = 33
+
+[[pipes]]
+from = "relay1.out"
+to = "bank1.ring_in"
+min = 33
+
+[[pipes]]
+from = "bank2.ring_out"
+to = "relay2.feed"
+min = 33
+
+[[pipes]]
+from = "relay2.out"
+to = "bank2.ring_in"
+min = 33

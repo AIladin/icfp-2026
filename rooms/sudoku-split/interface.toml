@@ -1,0 +1,8 @@
+description = "reads the 81 board values and broadcasts each to all four consumers"
+
+[ports]
+feed = "A"
+chk1 = "c"
+chk2 = "d"
+chk3 = "e"
+dec = "f"

@@ -1,0 +1,10 @@
+description = "folds the five cell bits and the carry into the 0/1 answer"
+
+[ports]
+from_decode = "A"
+from_cell5 = "B"
+from_cell4 = "C"
+from_cell3 = "D"
+from_cell2 = "E"
+from_cell1 = "F"
+out = "y"

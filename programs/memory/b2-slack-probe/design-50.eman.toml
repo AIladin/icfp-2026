@@ -1,0 +1,46 @@
+# The two-bank memory drum. Bank j holds the addresses with (addr+1) & 1 == j, so each ring is
+# half as long AND holds half the tokens -- which is why banking beats the single-ring champion on
+# both the sparse (ring-latency bound) and the dense (scan bound) cases. Server-confirmed 24/24 at
+# 22,570 avgTicks against the champion's 41,917; see `docs/vault/heap/Banked drum handoff.md`.
+#
+# Each bank's ring must hold 2*50 + 1 = 101 tokens. Capacity is `ring_out cells + ring_in cells + 1`
+# for the relay's hand, so the two legs are given min 50 each. UNDERSIZING DEADLOCKS SILENTLY -- it
+# presents as a step-cap, never an error -- and oversizing costs ticks, because a sparse op cannot
+# finish faster than one lap.
+
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+head = "memory-head-sbs"
+relay0 = "memory-relay"
+relay1 = "memory-relay"
+
+[[pipes]]
+from = "input.out"
+to = "head.input"
+
+[[pipes]]
+from = "head.output"
+to = "output.feed"
+
+[[pipes]]
+from = "head.ring_out0"
+to = "relay0.feed"
+min = 50
+
+[[pipes]]
+from = "relay0.out"
+to = "head.ring_in0"
+min = 50
+
+[[pipes]]
+from = "head.ring_out1"
+to = "relay1.feed"
+min = 50
+
+[[pipes]]
+from = "relay1.out"
+to = "head.ring_in1"
+min = 50

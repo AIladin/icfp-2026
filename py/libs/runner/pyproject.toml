@@ -1,0 +1,24 @@
+[project]
+name = "littleman-runner"
+version = "0.1.0"
+description = "Local interpreter and judge for Littleman (.man) programs"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "icfp-api-client",
+    "typer>=0.15",
+]
+
+[project.scripts]
+lm = "littleman.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+icfp-api-client = { workspace = true }
+
+# The import package (littleman) does not match the distribution name (littleman-runner).
+[tool.hatch.build.targets.wheel]
+packages = ["src/littleman"]

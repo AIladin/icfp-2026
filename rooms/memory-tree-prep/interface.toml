@@ -1,0 +1,7 @@
+description = "single-flight raw memory operation gate"
+
+[ports]
+raw = "A"
+result = "C"
+stream = "b"
+output = "d"

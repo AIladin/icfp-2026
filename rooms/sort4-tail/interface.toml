@@ -1,0 +1,6 @@
+description = "sort v4 relay: nonnegative to ring, negative unbiased to output"
+
+[ports]
+ring_in = "C"
+ring_out = "b"
+output = "d"

@@ -1,0 +1,59 @@
+# snake, incremental frames.  Rooms are written by `py/snake_rooms.py` from the same
+# code as the hand-laid `py/snake_gen102.py`, so the two cannot drift.
+#
+# Ring capacity is the sum of the two legs, not a split, so 57 + 5 is one number
+# with a free choice of where to spend it.  UNDERSIZING DEADLOCKS SILENTLY.
+#
+# The display applies ADDR before DATA within a tick, so DATA must not arrive
+# ahead of the ADDR that aims it: DRAW leaves ~12 ticks between the two sends, so
+# `addr` may be at most that many cells longer than `data`.  `min` on data and swap
+# is the only lever for it here -- a failing case is how a bad route shows up.
+
+problem = "snake"
+
+[rooms]
+input = "input"
+brain = "snake-brain"
+hub = "snake-hub"
+draw = "snake-draw"
+disp = "lllm-display"
+
+[[pipes]]
+from = "brain.ring_out"
+to = "hub.ring"
+min = 57
+
+[[pipes]]
+from = "hub.brain"
+to = "brain.ring_in"
+min = 5
+
+[[pipes]]
+from = "input.out"
+to = "hub.feed"
+min = 2
+max = 2
+
+[[pipes]]
+from = "hub.draw"
+to = "draw.feed"
+min = 13
+max = 13
+
+[[pipes]]
+from = "draw.addr"
+to = "disp.addr"
+min = 27
+max = 27
+
+[[pipes]]
+from = "draw.data"
+to = "disp.data"
+min = 32
+max = 32
+
+[[pipes]]
+from = "draw.swap"
+to = "disp.swap"
+min = 32
+max = 32

@@ -1,0 +1,11 @@
+description = "5-way decode of the packed verdict into cell bits"
+
+[ports]
+seed = "A"
+join = "B"
+bit1 = "c"
+bit2 = "d"
+bit3 = "e"
+bit4 = "f"
+bit5 = "g"
+carry = "h"

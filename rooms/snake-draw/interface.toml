@@ -1,0 +1,7 @@
+description = "snake: payload router -- ADDR, colour, erase to black, SWAP preserve"
+
+[ports]
+addr = "a"
+data = "c"
+swap = "e"
+feed = "G"

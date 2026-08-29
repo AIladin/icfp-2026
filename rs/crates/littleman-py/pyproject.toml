@@ -1,0 +1,18 @@
+[build-system]
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
+
+[project]
+name = "littleman-rs"
+description = "The Rust littleman runner, as a Python extension module"
+requires-python = ">=3.13"
+classifiers = ["Programming Language :: Rust"]
+dynamic = ["version"]
+
+[tool.maturin]
+module-name = "littleman_rs"
+# The crate lives in the `rs/` cargo workspace, which is why this is an editable-only path
+# dependency of the uv workspace: an editable install builds in place, so `../littleman` and the
+# parent `rs/Cargo.toml` both stay resolvable.
+manifest-path = "Cargo.toml"
+features = ["pyo3/extension-module"]

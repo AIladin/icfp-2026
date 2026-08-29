@@ -1,0 +1,8 @@
+description = "lllm narrow CPU, 140x46 interior; state/count north, emit south"
+
+[ports]
+payload = "O"
+flags = "E"
+state = "n"
+count = "k"
+emit = "q"

@@ -1,0 +1,6 @@
+description = "select quotient and zero-broadcast"
+
+[ports]
+request = "A"
+child0 = "b"
+child1 = "c"

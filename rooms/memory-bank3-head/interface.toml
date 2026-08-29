@@ -1,0 +1,7 @@
+description = "one adaptive memory drum head over local addresses 0..33"
+
+[ports]
+input = "A"
+output = "c"
+ring_in = "F"
+ring_out = "e"

@@ -1,0 +1,7 @@
+description = "memory bank3 preprocessor: op,addr,value -> op,bank,q,value"
+
+[ports]
+input = "A"
+out = "b"
+result = "C"
+output = "d"

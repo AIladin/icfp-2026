@@ -1,0 +1,41 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+gate = "memory-select-gate"
+dec = "memory-tree-decoder-r"
+leaf0 = "memory-tree-echo"
+leaf1 = "memory-tree-echo"
+
+[[pipes]]
+from = "input.out"
+to = "gate.raw"
+
+[[pipes]]
+from = "gate.request"
+to = "dec.parent_req"
+
+[[pipes]]
+from = "dec.child_req0"
+to = "leaf0.request"
+
+[[pipes]]
+from = "leaf0.response"
+to = "dec.child_resp0"
+
+[[pipes]]
+from = "dec.child_req1"
+to = "leaf1.request"
+
+[[pipes]]
+from = "leaf1.response"
+to = "dec.child_resp1"
+
+[[pipes]]
+from = "dec.parent_resp"
+to = "gate.result"
+
+[[pipes]]
+from = "gate.output"
+to = "output.feed"

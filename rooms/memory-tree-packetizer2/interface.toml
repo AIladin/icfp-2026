@@ -1,0 +1,5 @@
+description = "two-address-bit direct-tree packetizer probe"
+
+[ports]
+stream = "A"
+request = "b"

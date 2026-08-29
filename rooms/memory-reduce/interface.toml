@@ -1,0 +1,6 @@
+description = "add two child responses"
+
+[ports]
+child0 = "A"
+child1 = "B"
+response = "c"

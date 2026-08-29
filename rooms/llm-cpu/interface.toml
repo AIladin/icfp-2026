@@ -1,0 +1,5 @@
+description = "llm CPU, 796x2601 interior"
+
+[ports]
+bus_in = "L"
+bus_out = "k"

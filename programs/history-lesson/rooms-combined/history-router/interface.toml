@@ -1,0 +1,4 @@
+[ports]
+feed = "A"
+ring = "b"
+out = "c"

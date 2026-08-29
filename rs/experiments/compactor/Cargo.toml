@@ -1,0 +1,15 @@
+[package]
+name = "littleman-compactor-experiment"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+littleman = { path = "../../crates/littleman" }
+
+[profile.dev]
+opt-level = 2
+
+# Deliberately isolate this prototype from rs/Cargo.toml and its release artifacts.
+[workspace]

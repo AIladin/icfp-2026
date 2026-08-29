@@ -1,0 +1,5 @@
+# 100 columns to match the Python side (ruff) and the vault's prose width.
+max_width = 100
+# Keep short struct literals, matches and calls on one line instead of exploding them. This code is
+# a transcription of a Python module and reads best next to it.
+use_small_heuristics = "Max"

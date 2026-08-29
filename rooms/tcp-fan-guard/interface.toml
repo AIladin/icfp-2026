@@ -1,0 +1,6 @@
+description = "tcp H2: ordered merge of negative sequence checks and positive drained values"
+
+[ports]
+writer = "W"
+reader = "R"
+output = "o"

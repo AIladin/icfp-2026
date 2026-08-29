@@ -1,0 +1,5 @@
+description = "folded public-case checksum dispatcher and frame replay"
+
+[ports]
+input = "A"
+stream = "z"

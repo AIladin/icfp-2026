@@ -1,0 +1,116 @@
+"""Stacked-band floorplan: EMIT / P / Q down a narrow left band, ECHO + IN + SETUP below
+the display.  Score is max(w,h)^2 * ticks, so the only thing that matters is the *larger*
+side -- this layout drives the band down to 16 columns (display 34 + band) and puts every
+tall room in the strip under the display.
+
+Band, rows 0..26 (the display owns rows 1..26 from x=DX):
+    row 0        ADDR run east into the display's top wall
+    EMIT   2..7      P 10..19      Q 22..28
+Below, rows 27..:
+    ECHO 31..40      IN 43..45     SETUP 27..27+SH-1, x 22..W-1
+"""
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+
+import prog4 as prog2
+import rooms6 as R
+from canvas import Canvas, hline, vline
+from snake import Snake
+
+EMIT = (0, 2)
+P = (0, 11)
+Q = (0, 20)
+ECHO = (0, 31)
+INROOM = (0, 43)
+SETUP_X = 21
+SETUP_Y = 27
+LANE_P = 10   # ECHO -> P climbs this column past Q
+LANE_S = 11   # P -> display SWAP drops down this one
+
+
+def place(c, box, w, h, body):
+    x0, y0 = box
+    c.room(x0, y0, x0 + w - 1, y0 + h - 1)
+    for i, row in enumerate(body):
+        c.text(x0 + 1, y0 + 1 + i, row.replace(" ", "\0"))
+
+
+def build(w: int = 48, setup_h: int = 21, swap_right: int = 21) -> str:
+    h = max(SETUP_Y + setup_h, INROOM[1] + 3)
+    dx = w - 34
+    c = Canvas(w, h)
+    place(c, EMIT, R.EMIT_W, R.EMIT_H, R.EMIT_ROWS)
+    place(c, P, R.P_W, R.P_H, R.P_ROWS)
+    place(c, Q, R.Q_W, R.Q_H, R.Q_ROWS)
+    place(c, ECHO, R.ECHO_W, R.ECHO_H, R.ECHO_ROWS)
+
+    c.room(INROOM[0], INROOM[1], INROOM[0] + 2, INROOM[1] + 2)
+    c.put(INROOM[0] + 1, INROOM[1] + 1, "I")
+    c.display(dx, 1, dx + 33, 26)
+
+    bx1, by1 = 45, SETUP_Y + setup_h - 1
+    c.room(SETUP_X, SETUP_Y, bx1, by1)
+    sn = Snake(c, SETUP_X + 1, bx1 - 2, SETUP_Y + 1, by1 - 2)
+    sn.x, sn.d = bx1 - 2, -1
+    # One redundant full lap of five FIFO rotations is gone. Execute ten cells on the
+    # final eastbound row, turn around the bottom-right corner, then execute the remaining
+    # eleven northward in the return column. This is what removes SETUP's twentieth row.
+    tail = prog2.PROG[-21:]
+    if any(op in {"L", "X"} for op, _ in tail):
+        raise ValueError("SETUP folded tail must contain only one-cell operations")
+    sn.run(prog2.PROG[:-21])
+    if (sn.x, sn.y, sn.d) != (bx1 - 12, by1 - 2, 1):
+        raise ValueError(f"SETUP prefix moved: {(sn.x, sn.y, sn.d)}")
+    for i, (op, _) in enumerate(tail[:10]):
+        c.put(sn.x + i, sn.y, op)
+    c.put(bx1 - 2, sn.y, "v")
+    c.put(bx1 - 2, sn.y + 1, ">")
+    c.put(bx1 - 1, sn.y + 1, "^")
+    for i, (op, _) in enumerate(tail[10:]):
+        c.put(bx1 - 1, sn.y - i, op)
+    c.put(bx1 - 1, SETUP_Y + 1, "<")
+    # Spawn joins the return column after the final tail operation, before the next round.
+    c.put(bx1 - 2, SETUP_Y + 2, "@")
+    c.put(bx1 - 1, SETUP_Y + 2, "^")
+
+    wire(c, dx, swap_right)
+    return c.render()
+
+
+def wire(c: Canvas, dx: int, swap_right: int = 21) -> None:
+    # EMIT -> display ADDR. DATA doglegs around P; the two values reach the
+    # display together, where the specified ADDR-before-DATA order is decisive.
+    c.pipe([(3, 1), (3, 0)] + hline(0, 4, dx + 1), (0, 1))
+    c.pipe([(8, 9), (8, 10)] + hline(10, 9, dx - 1)
+           + [(dx - 1, 11), (dx - 1, 12)], (1, 0))
+    # P -> EMIT
+    c.pipe(vline(2, 10, 9), (0, -1))
+    # P -> display SWAP: descend the lane and turn under the display. With the split
+    # EMIT, the shortest obstacle-free route (swap_right=13, length 17) is timing-safe.
+    if not 12 < swap_right <= 21:
+        raise ValueError("swap_right must be in 13..21")
+    c.pipe([(10, 14), (LANE_S, 14)] + vline(LANE_S, 15, 27)
+           + hline(27, LANE_S + 1, swap_right), (0, -1))
+    # P <-> Q, interleaved on adjacent columns of the shared wall
+    c.pipe(vline(5, 18, 19), (0, 1))
+    c.pipe(vline(6, 19, 18), (0, -1))
+    # ECHO -> Q straight up a west column; ECHO -> P climbs the east lane past Q
+    c.pipe(vline(7, 30, 28) + [(6, 28), (5, 28), (4, 28), (4, 27)], (0, -1))
+    c.pipe(vline(LANE_P, 30, 17), (-1, 0))
+    # ECHO <-> SETUP
+    c.pipe([(9, 41), (9, 42)] + hline(42, 10, SETUP_X - 1), (1, 0))
+    c.pipe(hline(36, SETUP_X - 1, 19), (-1, 0))
+    # input room -> ECHO
+    c.pipe(vline(1, 42, 41), (0, -1))
+
+
+if __name__ == "__main__":
+    out = Path(sys.argv[1] if len(sys.argv) > 1 else "/tmp/plot2.man")
+    w = int(sys.argv[2]) if len(sys.argv) > 2 else 48
+    sh = int(sys.argv[3]) if len(sys.argv) > 3 else 21
+    swap_right = int(sys.argv[4]) if len(sys.argv) > 4 else 21
+    out.write_text(build(w, sh, swap_right))
+    print("wrote", out)

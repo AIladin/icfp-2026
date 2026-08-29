@@ -1,0 +1,5 @@
+description = "sudoku phase room: relay the mask bits, turn v into the ring skip count"
+
+[ports]
+feed = "E"
+out = "f"

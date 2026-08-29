@@ -1,0 +1,5 @@
+description = "pack op/value/address FIFO into one direct-tree packet"
+
+[ports]
+stream = "A"
+request = "b"

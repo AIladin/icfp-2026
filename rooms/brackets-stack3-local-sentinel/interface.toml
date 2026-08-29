@@ -1,0 +1,5 @@
+description = "narrow base-3 sentinel stack initialized through its push arm"
+
+[ports]
+feed = "C"
+verdict = "e"

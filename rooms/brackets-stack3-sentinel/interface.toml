@@ -1,0 +1,5 @@
+description = "depth-32-safe bijective-base-3 bracket stack"
+
+[ports]
+feed = "C"
+verdict = "e"

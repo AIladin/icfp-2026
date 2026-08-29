@@ -1,0 +1,7 @@
+description = "snake: ring turnaround and router -- echo, draw prefix, input, input*16"
+
+[ports]
+brain = "a"
+draw = "c"
+ring = "E"
+feed = "G"

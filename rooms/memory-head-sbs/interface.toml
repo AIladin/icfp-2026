@@ -1,0 +1,9 @@
+description = "banked memory head, side by side: bank 1 rotated 180 so both banks arms share the middle columns at disjoint rows"
+
+[ports]
+input = "A"
+output = "c"
+ring_in0 = "F"
+ring_out0 = "e"
+ring_in1 = "J"
+ring_out1 = "g"

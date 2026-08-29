@@ -1,0 +1,8 @@
+description = "server-shrunk LLLM colctl"
+
+[ports]
+inp = "A"
+rowkind = "C"
+head = "b"
+chars = "d"
+flags = "e"

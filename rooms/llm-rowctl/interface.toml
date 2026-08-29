@@ -1,0 +1,5 @@
+description = "llm ROWCTL, 31x6 interior"
+
+[ports]
+head = "B"
+kinds = "c"

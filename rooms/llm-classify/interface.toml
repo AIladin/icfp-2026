@@ -1,0 +1,5 @@
+description = "llm CLASSIFY, 86x220 interior"
+
+[ports]
+chars = "D"
+words = "e"

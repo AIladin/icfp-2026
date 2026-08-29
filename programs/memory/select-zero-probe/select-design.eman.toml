@@ -1,0 +1,28 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+select = "memory-select-zero"
+reduce = "memory-reduce"
+leaf0 = "memory-tree-echo"
+leaf1 = "memory-tree-echo"
+
+[[pipes]]
+from = "input.out"
+to = "select.request"
+[[pipes]]
+from = "select.child0"
+to = "leaf0.request"
+[[pipes]]
+from = "select.child1"
+to = "leaf1.request"
+[[pipes]]
+from = "leaf0.response"
+to = "reduce.child0"
+[[pipes]]
+from = "leaf1.response"
+to = "reduce.child1"
+[[pipes]]
+from = "reduce.response"
+to = "output.feed"

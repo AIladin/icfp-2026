@@ -1,0 +1,5 @@
+description = "seeded base-3 sentinel stack with folded successful-pop return"
+
+[ports]
+feed = "C"
+verdict = "e"

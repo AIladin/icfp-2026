@@ -1,0 +1,13 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+pack = "memory-tree-packetizer"
+
+[[pipes]]
+from = "input.out"
+to = "pack.stream"
+[[pipes]]
+from = "pack.request"
+to = "output.feed"

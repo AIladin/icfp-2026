@@ -1,0 +1,7 @@
+description = "sudoku V10 branchless ring head"
+
+[ports]
+ring_out = "a"
+ring_in = "B"
+mask_in = "C"
+verdict = "d"

@@ -1,0 +1,9 @@
+description = "llm RAM, 150x92 interior"
+
+[ports]
+ring_in = "O"
+ring_out = "g"
+disp = "m"
+bus_out = "l"
+bus_in = "K"
+steps = "F"

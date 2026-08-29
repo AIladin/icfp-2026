@@ -1,0 +1,7 @@
+description = "lllm ROT, 8x10 interior"
+
+[ports]
+count = "K"
+ring_in = "H"
+ring_out = "i"
+cell = "j"

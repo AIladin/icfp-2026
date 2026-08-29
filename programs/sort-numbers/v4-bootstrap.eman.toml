@@ -1,0 +1,34 @@
+# Falsifier for per-round bias bootstrap: HEAD sends K before each list; TAIL memorises the first K
+# and relays every K, while HEAD discards it before adopting the initial minimum. The ring therefore
+# still requires 18 slots (K + up to 16 values + marker). All maxima are finite timing/capacity guards.
+problem = "sort-numbers"
+
+[rooms]
+input = "input"
+output = "output"
+head = { type = "sort4-head", variants = ["bootstrap"] }
+tail = { type = "sort4-tail", variants = ["bootstrap"] }
+
+[[pipes]]
+from = "input.out"
+to = "head.input"
+min = 2
+max = 100
+
+[[pipes]]
+from = "head.ring_out"
+to = "tail.ring_in"
+min = 16
+max = 100
+
+[[pipes]]
+from = "tail.ring_out"
+to = "head.ring_back"
+min = 2
+max = 100
+
+[[pipes]]
+from = "tail.output"
+to = "output.feed"
+min = 2
+max = 100

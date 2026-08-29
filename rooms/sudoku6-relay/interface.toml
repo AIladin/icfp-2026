@@ -1,0 +1,5 @@
+description = "delay-line shuttle: take the ring's tail and push it back at its head"
+
+[ports]
+feed = "J"
+out = "k"

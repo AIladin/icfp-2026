@@ -1,0 +1,7 @@
+description = "DISP: one pipe in, the three LM-75 pipes out"
+
+[ports]
+cmd = "C"
+addr = "p"
+data = "t"
+swap = "u"

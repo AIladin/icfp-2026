@@ -1,0 +1,5 @@
+description = "server-shrunk LLLM rowctl"
+
+[ports]
+head = "B"
+kinds = "c"

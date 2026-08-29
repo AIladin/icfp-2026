@@ -1,0 +1,9 @@
+description = "RAM: the 128-word drum, the bus and the display taps"
+
+[ports]
+ring_in = "Q"
+ring_out = "g"
+bus_in = "K"
+bus_out = "l"
+disp = "m"
+inp = "F"

@@ -1,0 +1,65 @@
+# little-little-man: a general LLM interpreter.
+#
+# Five rooms, eight pipes.  The CPU keeps ONE pipe each way -- memory, the display and the round
+# input are all RAM commands -- so the layout compiler may place its `r`/`s` cells freely.
+# Architecture, measurements and the reasoning are in docs/vault/log/2026-07-26-llm-by-opus.md.
+problem = "little-little-man"
+
+[rooms]
+cpu = "llm-op-cpu"
+ram = "llm-op-ram"
+relay = "llm-op-relay"
+inp = "input"
+disp = "llm-op-disp"
+lm75 = "llm-display"
+
+[[pipes]]
+from = "cpu.bus_out"
+to = "ram.bus_in"
+max = 6000
+
+[[pipes]]
+from = "ram.bus_out"
+to = "cpu.bus_in"
+max = 6000
+
+# THE RING IS A SUM: both legs plus the two hands must hold all 352 words at once, with spare cells
+# so the queue can still shift.  Undersizing deadlocks silently as a step cap.  Length costs nothing
+# beyond that -- a longer pipe never starves a man who spends two ticks per word.
+[[pipes]]
+from = "ram.ring_out"
+to = "relay.ring_in"
+# Length is free: a longer ring never starves a man who spends two ticks a word (measured -- see
+# the log).  Only the *sum* matters: both legs plus the hands must hold all 352 words.
+min = 190
+max = 2000
+
+[[pipes]]
+from = "relay.ring_out"
+to = "ram.ring_in"
+# Length is free: a longer ring never starves a man who spends two ticks a word (measured -- see
+# the log).  Only the *sum* matters: both legs plus the hands must hold all 352 words.
+min = 190
+max = 2000
+
+[[pipes]]
+from = "inp.out"
+to = "ram.inp"
+
+# The three LM-75 pipes leave one wall of RAM and reach three different walls of the display, so
+# they must not cross; equal lengths also keep an ADDR ahead of the DATA behind it.
+[[pipes]]
+from = "ram.disp"
+to = "disp.cmd"
+
+[[pipes]]
+from = "disp.addr"
+to = "lm75.addr"
+
+[[pipes]]
+from = "disp.data"
+to = "lm75.data"
+
+[[pipes]]
+from = "disp.swap"
+to = "lm75.swap"

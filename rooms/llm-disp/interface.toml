@@ -1,0 +1,7 @@
+description = "llm DISP, 85x44 interior"
+
+[ports]
+cmd = "M"
+addr = "p"
+data = "t"
+swap = "u"

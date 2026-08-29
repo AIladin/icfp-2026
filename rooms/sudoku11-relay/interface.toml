@@ -1,0 +1,7 @@
+description = "sudoku phase tracker and counted ring relay"
+
+[ports]
+feed = "E"
+phase_out = "f"
+ring_feed = "G"
+ring_out = "h"

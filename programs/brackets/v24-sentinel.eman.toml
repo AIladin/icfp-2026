@@ -1,0 +1,29 @@
+# Depth-32-safe base-3 pipeline with S=1 sentinel and signed verdicts.
+problem = "brackets"
+
+[rooms]
+input = "input"
+decode = "brackets-decoder"
+stack = "brackets-stack3-sentinel"
+counter = "brackets-counter-signed"
+output = "output"
+
+[[pipes]]
+from = "input.out"
+to = "decode.feed"
+min = 2
+
+[[pipes]]
+from = "decode.out"
+to = "stack.feed"
+min = 2
+
+[[pipes]]
+from = "stack.verdict"
+to = "counter.feed"
+min = 2
+
+[[pipes]]
+from = "counter.out"
+to = "output.feed"
+min = 2

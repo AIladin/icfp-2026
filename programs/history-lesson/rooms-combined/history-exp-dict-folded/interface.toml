@@ -1,0 +1,4 @@
+[ports]
+stream = "A"
+ring_in = "B"
+mux = "c"

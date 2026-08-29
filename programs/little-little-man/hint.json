@@ -1,0 +1,14 @@
+{
+  "_comment": "Hand-written, not eman_hint output. Hint y increases NORTHWARD (lmp flips it); only the ranking survives, not the spacing. Three facts fix this arrangement. (1) RAM has all six ports on its NORTH wall and zero legal re-pinnings -- py/llm_rooms.py sweeps every wall and the binding audit rejects them all -- so RAM anchors a rank and everything wired to it is north or beside it. (2) DISP and the CPU sit BESIDE RAM on its own rank, not above it: one rank north, ram.disp and ram.bus_out both crossed the band above RAM together with relay.ring_out and the three contested cells every time. DISP takes an M-west variant and the CPU an L-west/k-west one, so both meet RAM's north pins by running east above it and dropping in from the side; RAM's pin columns already come in the right order west to east, O 6, g 16, m 30, l 50, K 90, F 120 = relay, disp, cpu, colctl. (3) The LM-75 goes SOUTH of DISP, because DISP's three sends p/t/u are on its SOUTH wall -- ranked north of DISP, all three had to wrap the whole 87-column room and disp.data vs disp.swap was the one contest that survived every other change.",
+  "pos": {
+    "lm75": [1, 0],
+    "ram": [0, 1],
+    "disp": [1, 1],
+    "cpu": [2, 1],
+    "relay": [0, 2],
+    "classify": [0, 3],
+    "colctl": [0, 4],
+    "inp": [0, 5],
+    "rowctl": [1, 5]
+  }
+}

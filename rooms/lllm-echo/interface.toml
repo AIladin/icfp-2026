@@ -1,0 +1,6 @@
+description = "lllm ECHO, 30x6 interior"
+
+[ports]
+payload = "L"
+state = "N"
+out = "o"

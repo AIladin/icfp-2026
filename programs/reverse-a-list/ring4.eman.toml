@@ -1,0 +1,19 @@
+# reverse-a-list v3.  ONE logic room on purpose: the reversal ladder is a backpack countdown
+# carried by the little men themselves, and a man cannot leave his room, so the ring lengths are
+# cell counts inside `reverse-main` and not pipe minimums.  The only pipes are I/O.
+# See `docs/vault/heap/Delay ring reversal.md`.
+
+problem = "reverse-a-list"
+
+[rooms]
+input = "input"
+output = "output"
+main = "reverse-main"
+
+[[pipes]]
+from = "input.out"
+to = "main.input"
+
+[[pipes]]
+from = "main.output"
+to = "output.feed"

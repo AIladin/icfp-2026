@@ -1,0 +1,52 @@
+problem = "history-lesson"
+
+[rooms]
+drum = "history-drum-direct"
+dec = "history-dec"
+exp = "history-exp-dict-folded"
+router = "history-router"
+classify = "history-year-classify"
+year = "history-year"
+relay = "history-relay"
+output = "output"
+
+[[pipes]]
+from = "drum.out"
+to = "dec.feed"
+min = 2
+
+[[pipes]]
+from = "dec.out"
+to = "exp.stream"
+min = 2
+
+[[pipes]]
+from = "exp.mux"
+to = "router.feed"
+min = 2
+
+[[pipes]]
+from = "router.ring"
+to = "relay.feed"
+# All 41 initialized values must fit before EXP begins receiving from the ring.
+min = 40
+
+[[pipes]]
+from = "relay.out"
+to = "exp.ring_in"
+min = 2
+
+[[pipes]]
+from = "router.out"
+to = "classify.feed"
+min = 2
+
+[[pipes]]
+from = "classify.out"
+to = "year.feed"
+min = 2
+
+[[pipes]]
+from = "year.out"
+to = "output.feed"
+min = 2

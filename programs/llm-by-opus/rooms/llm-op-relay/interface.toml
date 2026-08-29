@@ -1,0 +1,5 @@
+description = "RELAY: the far side of the drum, two ticks per word"
+
+[ports]
+ring_in = "E"
+ring_out = "o"

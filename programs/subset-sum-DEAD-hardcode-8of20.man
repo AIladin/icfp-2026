@@ -1,0 +1,17 @@
+  +-+          +-+
+  |I|          |O|
+  +-+          +-+
+   v            ^
+   v            ^
++---------------------+
+| >rsrrrrsrrrsrrsH    |
+| ^rsrsrrsrsrsrrsrsrs<|
+|               >`11`^|
+|        >.`14`-X0sH  |
+|@rM`12`-X1srrrrrrrrv |
+|        r    Hsrrrr< |
+|        M   HsWs1<   |
+|        >`35598`-X5v |
+|  HsrrrsrsrrrrsrsWs< |
+|         HsrsWs2M<   |
++---------------------+

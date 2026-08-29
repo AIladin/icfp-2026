@@ -1,0 +1,5 @@
+description = "one-bit two-token broadcast memory leaf"
+
+[ports]
+request = "A"
+response = "b"

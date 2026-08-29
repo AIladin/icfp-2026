@@ -1,0 +1,16 @@
+[package]
+name = "littleman-py"
+description = "Python bindings for the littleman runner"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[lib]
+# The import name on the Python side. `crate-type = cdylib` is what makes it an extension module.
+name = "littleman_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+littleman = { workspace = true }
+serde_json = { workspace = true }
+pyo3 = { version = "0.29", features = ["extension-module", "abi3-py313"] }

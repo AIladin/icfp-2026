@@ -1,0 +1,5 @@
+description = "sudoku H18 nested-split mask: rowbit concurrent with K, then colbit/v/boxbit"
+
+[ports]
+feed = "G"
+out = "h"

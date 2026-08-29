@@ -1,0 +1,9 @@
+description = "stream writes and gate reads across two B=2 memory heads"
+
+[ports]
+raw = "A"
+result0 = "C"
+result1 = "E"
+pair0 = "b"
+pair1 = "d"
+output = "f"

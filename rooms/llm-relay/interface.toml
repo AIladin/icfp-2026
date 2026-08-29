@@ -1,0 +1,6 @@
+description = "llm RELAY, 50x18 interior"
+
+[ports]
+words = "E"
+ring_in = "G"
+ring_out = "o"

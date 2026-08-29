@@ -1,0 +1,6 @@
+description = "sparse runtime LLM llm-alt-general-cpu"
+
+[ports]
+command = "a"
+response = "B"
+man_in = "C"

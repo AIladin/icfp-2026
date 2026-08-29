@@ -1,0 +1,8 @@
+description = "server-shrunk LLLM emit"
+
+[ports]
+cmd = "Q"
+colour = "M"
+addr = "p"
+swap = "u"
+data = "t"

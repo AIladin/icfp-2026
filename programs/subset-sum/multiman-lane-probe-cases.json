@@ -1,0 +1,7 @@
+[
+  {"name":"3+5 exists","rounds":[{"in":["8"],"out":["-1"]}]},
+  {"name":"all values exist","rounds":[{"in":["10"],"out":["-1"]}]},
+  {"name":"5+2 exists","rounds":[{"in":["7"],"out":["-1"]}]},
+  {"name":"one absent","rounds":[{"in":["1"],"out":["2"]}]},
+  {"name":"four absent","rounds":[{"in":["4"],"out":["5"]}]}
+]

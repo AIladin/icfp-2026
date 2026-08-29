@@ -1,0 +1,128 @@
+problem = "tcp"
+
+[rooms]
+input = "input"
+writer = "tcp-fan-writer"
+reader = "tcp-fan-reader-guard"
+guard = "tcp-fan-guard"
+output = "output"
+
+[[pipes]]
+from = "input.out"
+to = "writer.input"
+min = 2
+max = 30
+
+[[pipes]]
+from = "writer.guard"
+to = "guard.writer"
+min = 2
+max = 40
+
+[[pipes]]
+from = "reader.guard"
+to = "guard.reader"
+min = 16
+max = 40
+
+[[pipes]]
+from = "guard.output"
+to = "output.feed"
+min = 2
+max = 30
+
+[[pipes]]
+from = "writer.slot0"
+to = "reader.slot0"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot1"
+to = "reader.slot1"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot2"
+to = "reader.slot2"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot3"
+to = "reader.slot3"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot4"
+to = "reader.slot4"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot5"
+to = "reader.slot5"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot6"
+to = "reader.slot6"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot7"
+to = "reader.slot7"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot8"
+to = "reader.slot8"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot9"
+to = "reader.slot9"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot10"
+to = "reader.slot10"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot11"
+to = "reader.slot11"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot12"
+to = "reader.slot12"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot13"
+to = "reader.slot13"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot14"
+to = "reader.slot14"
+min = 2
+max = 40
+
+[[pipes]]
+from = "writer.slot15"
+to = "reader.slot15"
+min = 2
+max = 40

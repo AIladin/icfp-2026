@@ -1,0 +1,9 @@
+{
+  "pos": {
+    "input": [0, 0],
+    "decode": [0, 1],
+    "counter": [1, 0],
+    "stack": [1, 1],
+    "output": [2, 0]
+  }
+}

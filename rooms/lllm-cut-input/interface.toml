@@ -1,0 +1,4 @@
+description = "server-shrunk LLLM input"
+
+[ports]
+out = "a"

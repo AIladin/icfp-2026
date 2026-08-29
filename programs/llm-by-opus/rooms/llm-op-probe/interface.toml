@@ -1,0 +1,6 @@
+description = "PROBE: a throwaway RAM driver, never submitted"
+
+[ports]
+bus_out = "k"
+bus_in = "J"
+report = "o"

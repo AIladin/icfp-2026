@@ -1,0 +1,6 @@
+description = "lllm SPLIT, 121x21 interior"
+
+[ports]
+cell = "J"
+payload = "l"
+colour = "m"

@@ -1,0 +1,5 @@
+description = "narrow safe base-3 stack with separate push and pop climbs"
+
+[ports]
+feed = "C"
+verdict = "e"

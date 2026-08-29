@@ -1,0 +1,7 @@
+description = "server-shrunk LLLM rot"
+
+[ports]
+count = "K"
+ring_in = "H"
+ring_out = "i"
+cell = "j"

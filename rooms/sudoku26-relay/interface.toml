@@ -1,0 +1,5 @@
+description = "H26 narrow seeded sudoku ring relay"
+
+[ports]
+feed = "J"
+out = "k"

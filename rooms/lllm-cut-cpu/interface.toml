@@ -1,0 +1,8 @@
+description = "server-shrunk LLLM cpu"
+
+[ports]
+payload = "O"
+flags = "E"
+state = "n"
+count = "k"
+emit = "q"

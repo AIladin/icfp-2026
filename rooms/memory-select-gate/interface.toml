@@ -1,0 +1,7 @@
+description = "single-in-flight selector gate"
+
+[ports]
+raw = "A"
+request = "b"
+result = "C"
+output = "d"

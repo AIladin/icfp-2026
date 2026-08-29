@@ -1,0 +1,23 @@
+[
+  {
+    "name": "paren exact-empty then empty",
+    "rounds": [
+      {"in": ["2", "40", "41"], "out": ["0"]},
+      {"in": ["0"], "out": ["0"]}
+    ]
+  },
+  {
+    "name": "square exact-empty then paren",
+    "rounds": [
+      {"in": ["2", "91", "93"], "out": ["0"]},
+      {"in": ["2", "40", "41"], "out": ["0"]}
+    ]
+  },
+  {
+    "name": "brace exact-empty then mismatch",
+    "rounds": [
+      {"in": ["2", "123", "125"], "out": ["0"]},
+      {"in": ["1", "41"], "out": ["1"]}
+    ]
+  }
+]

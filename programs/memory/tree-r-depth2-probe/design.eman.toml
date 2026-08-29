@@ -1,0 +1,68 @@
+problem = "memory"
+
+[rooms]
+input = "input"
+output = "output"
+root = "memory-tree-decoder"
+d0 = "memory-tree-decoder-r"
+d1 = "memory-tree-decoder-r"
+leaf0 = "memory-tree-echo"
+leaf1 = "memory-tree-echo"
+leaf2 = "memory-tree-echo"
+leaf3 = "memory-tree-echo"
+
+[[pipes]]
+from = "input.out"
+to = "root.parent_req"
+
+[[pipes]]
+from = "root.child_req0"
+to = "d0.parent_req"
+
+[[pipes]]
+from = "d0.parent_resp"
+to = "root.child_resp0"
+
+[[pipes]]
+from = "root.child_req1"
+to = "d1.parent_req"
+
+[[pipes]]
+from = "d1.parent_resp"
+to = "root.child_resp1"
+
+[[pipes]]
+from = "d0.child_req0"
+to = "leaf0.request"
+
+[[pipes]]
+from = "leaf0.response"
+to = "d0.child_resp0"
+
+[[pipes]]
+from = "d0.child_req1"
+to = "leaf2.request"
+
+[[pipes]]
+from = "leaf2.response"
+to = "d0.child_resp1"
+
+[[pipes]]
+from = "d1.child_req0"
+to = "leaf1.request"
+
+[[pipes]]
+from = "leaf1.response"
+to = "d1.child_resp0"
+
+[[pipes]]
+from = "d1.child_req1"
+to = "leaf3.request"
+
+[[pipes]]
+from = "leaf3.response"
+to = "d1.child_resp1"
+
+[[pipes]]
+from = "root.parent_resp"
+to = "output.feed"

@@ -1,0 +1,39 @@
+[project]
+name = "icfp-2026-py"
+version = "0.1.0"
+description = "uv workspace root for the ICFP 2026 Python side"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "icfp-api-client",
+    "littleman-runner",
+    "littleman-rs",
+    "networkx>=3.6.1",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["libs/*"]
+
+[tool.uv.sources]
+icfp-api-client = { workspace = true }
+littleman-runner = { workspace = true }
+# The Rust runner, built by maturin from the `rs/` cargo workspace. `editable` is load-bearing: it
+# builds in place, so the crate's path dependency on `../littleman` and the parent `rs/Cargo.toml`
+# both stay resolvable. Rebuild after touching Rust with `maturin develop --release`.
+littleman-rs = { path = "../rs/crates/littleman-py", editable = true }
+
+[dependency-groups]
+dev = [
+    "ty>=0.0.63",
+    "pytest>=8.3",
+    "maturin>=1.7",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["libs"]
+# We write plain test functions; disabling class collection stops pytest trying to collect the
+# TestCase response model.
+python_classes = []

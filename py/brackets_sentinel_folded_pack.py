@@ -1,0 +1,54 @@
+"""Hand-place the folded seeded-sentinel pipeline in the proven 17x17 square."""
+
+import argparse
+from pathlib import Path
+
+from brackets_counter_gen import build as build_counter
+from brackets_decoder_seed_gen import build as build_decoder
+from brackets_sentinel_zero_pack import Canvas
+from brackets_stack3_sentinel_folded_gen import build as build_stack
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def build() -> str:
+    canvas = Canvas()
+    canvas.room(1, 1, ["O"])
+    canvas.room(1, 6, build_counter())
+    canvas.room(4, 1, ["I"])
+    canvas.room(7, 1, build_decoder())
+    canvas.room(7, 7, build_stack())
+
+    canvas.put(1, 3, "<")
+    canvas.put(1, 4, "<")
+    canvas.put(4, 3, ">")
+    canvas.put(4, 4, "v")
+    canvas.put(5, 4, "v")
+    canvas.put(15, 4, "v")
+    canvas.put(16, 4, ">")
+    canvas.put(16, 5, ">")
+    canvas.put(5, 13, "^")
+    canvas.put(4, 13, "|")
+    canvas.put(3, 13, "<")
+
+    text = canvas.render()
+    assert len(text.splitlines()) == 17
+    assert max(map(len, text.splitlines())) == 17
+    return text
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--out",
+        type=Path,
+        default=ROOT / "programs" / "brackets" / "v29-sentinel-folded-17x17.man",
+    )
+    args = parser.parse_args()
+    assert args.out.name != "brackets.man", "refusing to overwrite the live fallback"
+    args.out.write_text(build())
+    print(f"wrote {args.out} (17x17)")
+
+
+if __name__ == "__main__":
+    main()

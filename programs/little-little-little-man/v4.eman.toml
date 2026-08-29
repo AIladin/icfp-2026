@@ -1,0 +1,116 @@
+# The LLLM interpreter, as a netlist.  Every room is byte-for-byte the one in the green
+# 419x772 hand-placed grid (`programs/lllm-v1-routed.man`, 240.4G); only the arrangement is
+# up for grabs, and the arrangement is 8x of the score.
+#
+# The room graph is a path IN -> COLCTL -> TAIL -> ROT -> SPLIT -> ECHO -> CPU -> EMIT -> LM-75
+# with three chords: `flags` COLCTL->CPU, `cell` ROT->SPLIT and `emit` CPU->EMIT, plus the
+# ROWCTL side-car hanging off COLCTL and the TAIL<->ROT ring.
+#
+# THE RING IS A SUM, NOT A SPLIT.  TAIL -ring_out-> ROT -ring_out-> TAIL must hold the 256
+# cell codes of one raster lap; capacity is (cells in one leg) + (cells in the other) + the
+# hands in between.  Undersizing DEADLOCKS SILENTLY and presents as a step cap, never an error.
+# The green grid ran 231 + 233 = 464; 150 + 150 keeps 44 cells of slack and shortens the lap.
+
+problem = "little-little-little-man"
+
+# Every lllm room type now carries only variants this floorplan can use: `py/lllm_rooms.py`
+# renders each re-pinning and keeps it only if every `s`/`r`/`q` still reaches the same port it
+# does in the base room.  That audit is strict on purpose -- a send that moves to another pipe is
+# a different program -- and it is why CPU keeps `O`/`n`/`q` on its south wall and EMIT keeps
+# `p`/`u`/`t` on its: those sends are spread over 200 columns and no other wall can serve them.
+[rooms]
+inp = "input"
+colctl = "lllm-colctl"
+rowctl = "lllm-rowctl"
+tail = "lllm-tail"
+rot = "lllm-rot"
+split = "lllm-split"
+echo = "lllm-echo"
+cpu = "lllm-cpu2"
+emit = "lllm-emit2"
+lm75 = "lllm-display"
+
+[[pipes]]
+from = "inp.out"
+to = "colctl.inp"
+
+[[pipes]]
+from = "colctl.head"
+to = "rowctl.head"
+
+[[pipes]]
+from = "rowctl.kinds"
+to = "colctl.rowkind"
+
+[[pipes]]
+from = "colctl.chars"
+to = "tail.chars"
+
+[[pipes]]
+from = "colctl.flags"
+to = "cpu.flags"
+
+# The two legs together hold the 256-cell raster. CPU/ROT consume cells while TAIL is still
+# loading, so the initial leg does not need to hold all 256 by itself.
+[[pipes]]
+from = "tail.ring_out"
+to = "rot.ring_in"
+min = 150
+
+[[pipes]]
+from = "rot.ring_out"
+to = "tail.ring_in"
+min = 150
+
+[[pipes]]
+from = "rot.cell"
+to = "split.cell"
+
+[[pipes]]
+from = "cpu.count"
+to = "rot.count"
+
+[[pipes]]
+from = "split.payload"
+to = "echo.payload"
+
+[[pipes]]
+from = "split.colour"
+to = "emit.colour"
+
+[[pipes]]
+from = "echo.out"
+to = "cpu.payload"
+
+# Each CPU leaf pushes B, A and direction before ECHO starts consuming the next block.
+[[pipes]]
+from = "cpu.state"
+to = "echo.state"
+min = 3
+
+[[pipes]]
+from = "cpu.emit"
+to = "emit.cmd"
+
+# The three LM-75 pipes carry an ORDERING constraint, not just a length: EMIT's boot tail sends
+# ADDR, walks 185 cells, sends DATA, walks 101, sends SWAP.  A SWAP pipe shorter than
+# (DATA - 101) commits frame 0 before the man's own pixel lands, and an ADDR pipe shorter than
+# (DATA - 181) lets the *second* ADDR overtake the first DATA and repaint at the new address.
+# Measured on the first routed seed: ADDR 11, DATA 211, SWAP 122 -- and ADDR 200 cells shorter
+# than DATA is exactly `la - ld <= -181`, so the *second* ADDR overtook the first DATA and every
+# restore painted at the new address (the frame comes out as the man's trail, shifted one cell).
+# `min` on ADDR and SWAP holds the arrival order for any DATA the packer can produce below ~270.
+[[pipes]]
+from = "emit.addr"
+to = "lm75.addr"
+min = 35
+
+[[pipes]]
+from = "emit.data"
+to = "lm75.data"
+min = 20
+
+[[pipes]]
+from = "emit.swap"
+to = "lm75.swap"
+min = 0
